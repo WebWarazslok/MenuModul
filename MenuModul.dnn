@@ -52,7 +52,7 @@
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>Company.Modules.MenuModul.Controllers/Category/Index.mvc</controlSrc>
+                    <controlSrc>Company.Modules.MenuModul.Controllers/MenuCategory/Index.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>

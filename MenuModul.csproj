@@ -115,12 +115,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Components\CategoryManager.cs" />
+    <Compile Include="Components\MenuCategoryManager.cs" />
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\ItemManager.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\MenuCategoryController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\MenuCategory.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Models\Settings.cs" />
@@ -167,7 +167,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Settings\Settings.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\MenuCategory\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,7 +176,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Category.resx" />
+    <Content Include="App_LocalResources\MenuCategory.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
