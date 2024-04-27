@@ -11,27 +11,45 @@
     }
     else
     {
-        /*
-<table>
-    <tr>
-        @for (var i = 0; i < 2; i++)
-        {
-            <td>
-                <div class="tm_td">@Model[i].Name</div>
-            </td>
-        }
-    </tr>
-    <tr>
-        @for (var i = 2; i < 4; i++)
-        {
-            <td>
-                <div class="tm_td">@Model[i].Name</div>
-            </td>
-        }
-    </tr>
-</table>*/
+    <table>
+        <tr>
+            @for (var i = 0; i < 2; i++)
+            {
+                if (@Model[i].Name.Contains("Főző"))
+                {
+                    <td>
+                        <div class="menu_td">Vegyes</div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
+                    </td>
+                }
 
-<ul class="tm_tl">
+            }
+        </tr>
+        <tr>
+            @for (var i = 2; i < 4; i++)
+            {
+                if (@Model[i].Name.Contains("Főző"))
+                {
+                    <td>
+                        <div class="menu_td">Vegyes</div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
+                    </td>
+                }
+            }
+        </tr>
+    </table>
+
+/*<ul class="tm_tl">
     @foreach (var item in Model)
     {
         if (@item.Name.Contains("Főző"))
@@ -48,6 +66,6 @@
         }
 
     }
-</ul>
+</ul>*/
     }
 </div>

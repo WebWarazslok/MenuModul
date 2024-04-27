@@ -17,11 +17,12 @@ namespace Company.Modules.MenuModul.Components
     {
         public IEnumerable<MenuCategory> GetCategory()
         {
+            var csom = "%csomagok%";
             IEnumerable<MenuCategory> t;
             using (IDataContext ctx = DataContext.Instance())
             {
                 var rep = ctx.GetRepository<MenuCategory>();
-                t = rep.Get();
+                t = rep.Find("WHERE NAME LIKE @0",csom);
             }
             return t;
         }

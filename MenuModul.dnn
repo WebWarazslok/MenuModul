@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="MenuModul" type="Module" version="1.0.1">
+    <package name="MenuModul" type="Module" version="1.0.2">
       <friendlyName>MenuModul</friendlyName>
       <description>MenuModul</description>
       <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
@@ -22,12 +22,12 @@
             <script type="Install">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>00.00.01.SqlDataProvider</name>
-              <version>1.0.1</version>
+              <version>1.0.2</version>
             </script>
             <script type="UnInstall">
               <path>Providers\DataProviders\SqlDataProvider</path>
               <name>Uninstall.SqlDataProvider</name>
-              <version>1.0.1</version>
+              <version>1.0.2</version>
             </script>
           </scripts>
         </component>
