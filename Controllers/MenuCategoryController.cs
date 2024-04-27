@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Company.Modules.MenuModul.Models;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
+using System.Diagnostics;
+using Company.Modules.MenuModul.Components;
 
 namespace Company.Modules.MenuModul.Controllers
 {
@@ -70,7 +72,7 @@ namespace Company.Modules.MenuModul.Controllers
         #endregion
 
         #region IfAPIIsNotWorking
-
+        /*
         static List<MenuCategory> categories = new List<MenuCategory>{
                 new MenuCategory() {Name = "Ázsiai" } ,
                 new MenuCategory() {Name = "Európai" } ,
@@ -81,6 +83,14 @@ namespace Company.Modules.MenuModul.Controllers
         public ActionResult Index()
         {
             return View(categories);
+        }*/
+        #endregion
+
+        #region Data from Hcc
+        public ActionResult Index()
+        {
+            var items=MenuCategoryManager.Instance.GetCategory();
+            return View(items);
         }
         #endregion
     }

@@ -11,17 +11,17 @@ namespace Company.Modules.MenuModul.Components
 {
     internal interface ICategoryManager
     {
-        MenuCategory GetCategory(int catId);
+        IEnumerable<MenuCategory> GetCategory();
     }
     internal class MenuCategoryManager : ServiceLocator<ICategoryManager, MenuCategoryManager>, ICategoryManager
     {
-        public MenuCategory GetCategory(int catId)
+        public IEnumerable<MenuCategory> GetCategory()
         {
-            MenuCategory t;
+            IEnumerable<MenuCategory> t;
             using (IDataContext ctx = DataContext.Instance())
             {
                 var rep = ctx.GetRepository<MenuCategory>();
-                t = rep.GetById(catId);
+                t = rep.Get();
             }
             return t;
         }

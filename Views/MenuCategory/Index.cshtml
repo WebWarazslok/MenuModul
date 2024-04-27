@@ -5,19 +5,49 @@
 
 
 <div id="Items-@Dnn.ModuleContext.ModuleId">
-    @if (Model.Count() == 0)
+    @if (Model == null)
     {
         <p>@Dnn.LocalizeString("NoCategories")</p>
     }
     else
     {
-        <ul class="tm_tl">
-            @foreach (var item in Model)
-            {
-                <li class="tm_t">
-                    <div class="tm_td">@item.Name</div>
-                </li>
-            }
-        </ul>
+        /*
+<table>
+    <tr>
+        @for (var i = 0; i < 2; i++)
+        {
+            <td>
+                <div class="tm_td">@Model[i].Name</div>
+            </td>
+        }
+    </tr>
+    <tr>
+        @for (var i = 2; i < 4; i++)
+        {
+            <td>
+                <div class="tm_td">@Model[i].Name</div>
+            </td>
+        }
+    </tr>
+</table>*/
+
+<ul class="tm_tl">
+    @foreach (var item in Model)
+    {
+        if (@item.Name.Contains("Főző"))
+        {
+            <li class="tm_t">
+                Vegyes
+            </li>
+        }
+        else if (@item.Name.Contains("csomagok"))
+        {
+            <li class="tm_t">
+                @item.Name.Substring(0, @item.Name.LastIndexOf(' '))
+            </li>
+        }
+
+    }
+</ul>
     }
 </div>
