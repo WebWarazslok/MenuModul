@@ -1,7 +1,9 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<List< Company.Modules.MenuModul.Models.MenuCategory >>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<List<Company.Modules.MenuModul.Models.MenuCategory>>
 
 @using System.Text.RegularExpressions
 @using DotNetNuke.Web.Mvc.Helpers
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using DotNetNuke.Framework.JavaScriptLibraries
 
 
 <div id="Items-@Dnn.ModuleContext.ModuleId">
@@ -11,61 +13,121 @@
     }
     else
     {
-    <table>
-        <tr>
-            @for (var i = 0; i < 2; i++)
-            {
-                if (@Model[i].Name.Contains("Főző"))
+        <table>
+            <tr>
+                @for (var i = 0; i < 2; i++)
                 {
-                    <td>
-                        <div class="menu_td">Vegyes</div>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
-                    </td>
-                }
+                    if (@Model[i].Name.Contains("Főző"))
+                    {
+                        <td>
+                            <div class="menu_td">Vegyes</div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
+                        </td>
+                    }
 
-            }
-        </tr>
-        <tr>
-            @for (var i = 2; i < 4; i++)
-            {
-                if (@Model[i].Name.Contains("Főző"))
-                {
-                    <td>
-                        <div class="menu_td">Vegyes</div>
-                    </td>
                 }
-                else
+            </tr>
+            <tr>
+                @for (var i = 2; i < 4; i++)
                 {
-                    <td>
-                        <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
-                    </td>
+                    if (@Model[i].Name.Contains("Főző"))
+                    {
+                        <td>
+                            <div class="menu_td">Vegyes</div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
+                        </td>
+                    }
                 }
-            }
-        </tr>
-    </table>
-
-/*<ul class="tm_tl">
-    @foreach (var item in Model)
-    {
-        if (@item.Name.Contains("Főző"))
-        {
-            <li class="tm_t">
-                Vegyes
-            </li>
-        }
-        else if (@item.Name.Contains("csomagok"))
-        {
-            <li class="tm_t">
-                @item.Name.Substring(0, @item.Name.LastIndexOf(' '))
-            </li>
-        }
-
+            </tr>
+            <tr>
+                <td><div id="AButton">A</div></td>
+                <td><div id="BButton">B</div></td>
+            </tr>
+        </table>
+        <div id="BContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hétfő</th>
+                        <th>Kedd</th>
+                        <th>Szerda</th>
+                        <th>Csütörtök</th>
+                        <th>Péntek</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BKaja 1</td>
+                        <td>BKaja 2</td>
+                        <td>BKaja 3</td>
+                        <td>BKaja 4</td>
+                        <td>BKaja 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="AContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hétfő</th>
+                        <th>Kedd</th>
+                        <th>Szerda</th>
+                        <th>Csütörtök</th>
+                        <th>Péntek</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AKaja 1</td>
+                        <td>AKaja 2</td>
+                        <td>AKaja 3</td>
+                        <td>AKaja 4</td>
+                        <td>AKaja 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     }
-</ul>*/
-    }
+    <script>
+
+        const AButton = document.getElementById('AButton');
+        const BButton = document.getElementById('BButton');
+
+        const AContainer = document.getElementById('AContainer');
+        const BContainer = document.getElementById('BContainer');
+
+        AButton.addEventListener('click', () => {
+            if (AContainer.style.display === 'none' && BContainer.style.display === 'block') {
+                BContainer.style.display = 'none';
+                AContainer.style.display = 'block';
+            } else if (AContainer.style.display === 'none') {
+                AContainer.style.display = 'block';
+            }
+            else {
+                AContainer.style.display = 'none';
+            }
+        });
+        BButton.addEventListener('click', () => {
+            if (BContainer.style.display === 'none' && AContainer.style.display === 'block') {
+                AContainer.style.display = 'none';
+                BContainer.style.display = 'block';
+            } else if (BContainer.style.display === 'none') {
+                BContainer.style.display = 'block';
+            }
+            else {
+                BContainer.style.display = 'none';
+            }
+        });
+    </script>
 </div>
