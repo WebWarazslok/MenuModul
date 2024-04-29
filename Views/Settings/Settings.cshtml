@@ -6,15 +6,15 @@
 <fieldset>
     <div class="dnnFormItem">
         <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting1, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => Model.CategoryId, new { @class = "col-md-2 control-label" })
         </div>
-        @Html.CheckBoxFor(m => Model.Setting1)
+        @Html.DropDownList("MovieType")
     </div>
     <div class="dnnFormItem">
         <div class="dnnLabel" style="position: relative;">
-            @Html.LabelFor(m => Model.Setting2, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => Model.ProductId, new { @class = "col-md-2 control-label" })
         </div>
-        @Html.TextBoxFor(m => Model.Setting2)
+        @Html.TextBoxFor(m => Model.ProductId)
     </div>
 </fieldset>
 
