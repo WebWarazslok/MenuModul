@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="MenuModul" type="Module" version="00.00.01">
+    <package name="MenuModul" type="Module" version="1.0.3">
       <friendlyName>MenuModul</friendlyName>
       <description>MenuModul</description>
       <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
@@ -52,7 +52,7 @@
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>Company.Modules.MenuModul.Controllers/Item/Index.mvc</controlSrc>
+                    <controlSrc>Company.Modules.MenuModul.Controllers/MenuCategory/Index.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>

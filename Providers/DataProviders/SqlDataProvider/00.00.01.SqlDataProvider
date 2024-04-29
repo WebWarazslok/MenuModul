@@ -11,6 +11,19 @@
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MenuModul_Items]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}MenuModul_Items]
 GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MenuModul_Menus]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}MenuModul_Menus]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MenuModul_MenuOrders]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}MenuModul_MenuOrders]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MenuModul_Options]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}MenuModul_Options]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}MenuModul_MenuProducts]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}MenuModul_MenuProducts]
+GO
+
 
 CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Items
     (
@@ -26,8 +39,6 @@ CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Items
     )  ON [PRIMARY]
      TEXTIMAGE_ON [PRIMARY]
 GO
-
-
 ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_Items ADD CONSTRAINT
     PK_{objectQualifier}MenuModul_Items PRIMARY KEY CLUSTERED 
     (
@@ -36,6 +47,62 @@ ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_Items ADD CONSTRAINT
 
 GO
 
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Menus
+    (
+        [MenusID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_Menus] PRIMARY KEY CLUSTERED,
+        [OptionID] INT,
+        [Price] INT        
+    )  ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_MenuOrders
+    (
+        [MenuOrdersID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_MenuOrders] PRIMARY KEY CLUSTERED,
+        [UserID] [int] NULL ,
+        [MenusID] INT,
+        [OrderDate] [datetime],
+        [Quantity] INT,
+        [Payed] BIT
+    )  ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_MenuOrders WITH NOCHECK ADD CONSTRAINT [FK_MenuOrders_Menus] FOREIGN KEY ([MenusID])
+    REFERENCES {databaseOwner}{objectQualifier}MenuModul_Menus ([MenusID])
+    ON DELETE CASCADE
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Options
+    (
+        [OptionsID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_Options] PRIMARY KEY CLUSTERED,
+        [Option] NVARCHAR(64),
+    )  ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_MenuProducts
+    (
+        [MenuProductsID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_MenuProducts] PRIMARY KEY CLUSTERED,
+        [OptionsID] [int] NULL ,
+        [Category] NVARCHAR(64),
+        [Day] NVARCHAR(64),
+        [SKU] INT
+    )  ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_MenuProducts WITH NOCHECK ADD CONSTRAINT [FK_MenuProducts_Options] FOREIGN KEY ([OptionsID])
+    REFERENCES {databaseOwner}{objectQualifier}MenuModul_Options ([OptionsID])
+    ON DELETE CASCADE
+GO
+
+INSERT INTO [MenuModul_Options] (
+	[Option]
+	) VALUES
+	('A'),
+    ('B');
+GO
 
 /************************************************************/
 /*****              SqlDataProvider                     *****/
