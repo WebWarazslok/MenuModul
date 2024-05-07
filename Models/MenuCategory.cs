@@ -7,19 +7,16 @@ using System.Web.Caching;
 
 namespace Company.Modules.MenuModul.Models
 {
-    [TableName("MenuModul_MenuProducts")]
+    [TableName("hcc_CategoryTranslations")]
     //setup the primary key for table
-    [PrimaryKey("MenuProductsID")]
+    [PrimaryKey("CategoryId")]
     //configure caching using PetaPoco
-    [Cacheable("MenuProductsCache", CacheItemPriority.Default, 20)]
+    [Cacheable("CategoryTranslations", CacheItemPriority.Default, 20)]
     //scope the objects to the ModuleId of a module on a page (or copy of a module on a page)
     [Scope("ModuleId")]
     public class MenuCategory
     {
-        public int MenuProductsID { get; set; }
-        public int OptionsID { get; set; }
-        public string Category { get; set; }
-        public string Day { get; set; }
-        public int SKU { get; set; }
+        public string Name { get; set; }
+        //public string MetaTitle { get; set; }
     }
 }

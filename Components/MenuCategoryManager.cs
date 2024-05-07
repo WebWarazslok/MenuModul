@@ -11,17 +11,18 @@ namespace Company.Modules.MenuModul.Components
 {
     internal interface ICategoryManager
     {
-        IEnumerable<MenuCategory> GetItems();
+        IEnumerable<MenuCategory> GetCategory();
     }
     internal class MenuCategoryManager : ServiceLocator<ICategoryManager, MenuCategoryManager>, ICategoryManager
     {
-        public IEnumerable<MenuCategory> GetItems()
+        public IEnumerable<MenuCategory> GetCategory()
         {
+            var csom = "%csomagok%";
             IEnumerable<MenuCategory> t;
             using (IDataContext ctx = DataContext.Instance())
             {
                 var rep = ctx.GetRepository<MenuCategory>();
-                t = rep.Get();
+                t = rep.Find("WHERE NAME LIKE @0",csom);
             }
             return t;
         }

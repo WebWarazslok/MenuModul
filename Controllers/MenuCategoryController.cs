@@ -89,7 +89,7 @@ namespace Company.Modules.MenuModul.Controllers
         #region Data from Hcc
         public ActionResult Index()
         {
-            var items=MenuCategoryManager.Instance.GetItems();
+            var items=MenuCategoryManager.Instance.GetCategory();
             return View(items);
         }
         #endregion

@@ -47,60 +47,61 @@ ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_Items ADD CONSTRAINT
 
 GO
 
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Menus
+    (
+        [MenusID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_Menus] PRIMARY KEY CLUSTERED,
+        [OptionID] INT,
+        [Price] INT        
+    )  ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_MenuOrders
+    (
+        [MenuOrdersID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_MenuOrders] PRIMARY KEY CLUSTERED,
+        [UserID] [int] NULL ,
+        [MenusID] INT,
+        [OrderDate] [datetime],
+        [Quantity] INT,
+        [Payed] BIT
+    )  ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_MenuOrders WITH NOCHECK ADD CONSTRAINT [FK_MenuOrders_Menus] FOREIGN KEY ([MenusID])
+    REFERENCES {databaseOwner}{objectQualifier}MenuModul_Menus ([MenusID])
+    ON DELETE CASCADE
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_Options
+    (
+        [OptionsID] INT NOT NULL IDENTITY (1, 1)
+                CONSTRAINT [PK_Options] PRIMARY KEY CLUSTERED,
+        [Option] NVARCHAR(64),
+    )  ON [PRIMARY]
+GO
+
 CREATE TABLE {databaseOwner}{objectQualifier}MenuModul_MenuProducts
     (
         [MenuProductsID] INT NOT NULL IDENTITY (1, 1)
                 CONSTRAINT [PK_MenuProducts] PRIMARY KEY CLUSTERED,
-        [OptionsID] INT,
+        [OptionsID] [int] NULL ,
         [Category] NVARCHAR(64),
         [Day] NVARCHAR(64),
         [SKU] INT
     )  ON [PRIMARY]
 GO
 
-INSERT INTO [MenuModul_MenuProducts] (
-	[OptionsID],[Category],[Day],[SKU]
+ALTER TABLE {databaseOwner}{objectQualifier}MenuModul_MenuProducts WITH NOCHECK ADD CONSTRAINT [FK_MenuProducts_Options] FOREIGN KEY ([OptionsID])
+    REFERENCES {databaseOwner}{objectQualifier}MenuModul_Options ([OptionsID])
+    ON DELETE CASCADE
+GO
+
+INSERT INTO [MenuModul_Options] (
+	[Option]
 	) VALUES
-	(1,'Ázsiai','Hétfő',1220),
-    (1,'Ázsiai','Kedd',1221),
-    (1,'Ázsiai','Szerda',1222),
-    (1,'Ázsiai','Csütörtök',1223),
-    (1,'Ázsiai','Péntek',1224),
-    (2,'Ázsiai','Hétfő',1110),
-    (2,'Ázsiai','Kedd',1111),
-    (2,'Ázsiai','Szerda',1112),
-    (2,'Ázsiai','Csütörtök',1113),
-    (2,'Ázsiai','Péntek',1114),
-    (1,'Európai','Hétfő',1410),
-    (1,'Európai','Kedd',1411),
-    (1,'Európai','Szerda',1412),
-    (1,'Európai','Csütörtök',1413),
-    (1,'Európai','Péntek',1416),
-    (2,'Európai','Hétfő',1714),
-    (2,'Európai','Kedd',1715),
-    (2,'Európai','Szerda',1716),
-    (2,'Európai','Csütörtök',1717),
-    (2,'Európai','Péntek',1718),
-    (1,'Dél-Amerikai','Hétfő',1314),
-    (1,'Dél-Amerikai','Kedd',1315),
-    (1,'Dél-Amerikai','Szerda',1316),
-    (1,'Dél-Amerikai','Csütörtök',1317),
-    (1,'Dél-Amerikai','Péntek',1318),
-    (2,'Dél-Amerikai','Hétfő',1319),
-    (2,'Dél-Amerikai','Kedd',1320),
-    (2,'Dél-Amerikai','Szerda',1321),
-    (2,'Dél-Amerikai','Csütörtök',1322),
-    (2,'Dél-Amerikai','Péntek',1323),
-    (1,'Vegyes','Hétfő',1314),
-    (1,'Vegyes','Kedd',1317),
-    (1,'Vegyes','Szerda',1320),
-    (1,'Vegyes','Csütörtök',1416),
-    (1,'Vegyes','Péntek',1716),
-    (2,'Vegyes','Hétfő',1411),
-    (2,'Vegyes','Kedd',1111),
-    (2,'Vegyes','Szerda',1220),
-    (2,'Vegyes','Csütörtök',1412),
-    (2,'Vegyes','Péntek',1323);
+	('A'),
+    ('B');
 GO
 
 /************************************************************/
