@@ -46,6 +46,7 @@
                                 <div class="MenuModuleCard" id="NotActive" onclick="ChangeCategory(4)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/mealkit.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
                             }
                         }
+                        <div class="FunFact"><ion-icon name="information-circle"></ion-icon><div id="FunFact"></div></div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6"></div>
@@ -59,6 +60,17 @@
         </div> 
     }
 <script>
+    //FunFactList
+    var FunList = ["Tudtad? A sajt a világ legnagyobb mennyiségben ellopott étele...",
+        "Tudtad? A csicseriborsó és a mandula majdnem annyi fehérjét tartalmaz, mint a steak...",
+        "Tudtad? Az eper a rózsa családjába tartozik...",
+        "Tudtad? A DNN a legjobb...",
+        "Tudtad? A WebWarázslók csapata kipróbálta az összes európai boxot..."];
+    var randomIndex = Math.floor(Math.random() * FunList.length);
+    var selectedElement = FunList[randomIndex];
+    document.getElementById("FunFact").innerText = selectedElement;
+
+    //Menu
     var myModel = @Html.Raw(Json.Encode(Model));
     console.log(myModel);
     var actOp = 1;
@@ -88,6 +100,12 @@
             GetMenu(actOp, actCat);
         }
     function GetMenu(actOp, actCat) {
+        //FunFact
+        randomIndex = Math.floor(Math.random() * FunList.length);
+        selectedElement = FunList[randomIndex];
+        document.getElementById("FunFact").innerText = selectedElement;
+
+        //GetMenu
         document.getElementById("Menu").innerHTML = "";
         if (actOp === 1) {
             document.getElementById("Het").innerHTML = "A Heti";

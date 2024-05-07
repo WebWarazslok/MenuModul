@@ -112,3 +112,14 @@ span#ActiveOption {
     background: #b33a20;
     border: 2px solid black;
 }
+.FunFact{
+    height: 50px;
+    display: flex;
+    align-items:center;
+    margin: 10px;
+}
+.FunFact ion-icon{
+    color:#b33a20;
+    font-size: xx-large;
+    margin-right: 10px;
+}
