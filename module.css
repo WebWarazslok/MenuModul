@@ -1,42 +1,114 @@
-table {
-    width: 50%;
-    table-layout: fixed;
-}
-.menu_td {
-    border: 1px solid #5a191b;
+.MenuModuleCard {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    height: 270px;
+    background-color: #120603;
+    border: 2px solid #b33a20;
     border-radius: 25px;
-    height: 150px;
-    vertical-align: bottom;
-    text-align: center;
-    font-weight: bold;
-    background-color: #401114;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.MenuModuleImage img{
+    height:240px;
+    width: 100%;
+    object-fit:cover;
+    position:absolute;
+    left:0;
+    bottom:0;
+    object-position: 50% 70%;
+}
+.MenuModuleOptionsRow{
     margin: 10px;
 }
-#AButton {
+.MenuModuleOption {
     cursor: pointer;
-    background-color: #401114;
-    text-align:center;
-    vertical-align:central !important;
-    color: white;
-    font-weight: bold;
-    border: 1px solid #5a191b;
-    width: 50px;
     height: 50px;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
 }
-#BButton {
-    cursor: pointer;
-    background-color: #401114;
-    text-align: center;
-    vertical-align: central !important;
-    color: white;
-    font-weight: bold;
-    border: 1px solid #5a191b;
-    width: 50px;
+.MenuModuleOption span {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.MenuModuleOption:nth-child(odd){
+    padding-right:5px !important;
+    padding-left: 0px !important;
+}
+.MenuModuleOption:nth-child(even){
+    padding-right:0px !important;
+    padding-left: 5px !important;
+}
+.MenuModuleOption:nth-child(odd) span{
+    border-top-left-radius:15px;
+    border-bottom-left-radius:15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius:5px;
+    background-color: #120603;
+    border: 2px solid #b33a20;
+}
+.MenuModuleOption:nth-child(even) span{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #120603;
+    border: 2px solid #b33a20;
+}
+.Valami {
+    width: 95%;
+    margin-inline: auto;
+}
+.HetiMenu{
+    margin-top:50px;
+}
+.Nap {
     height: 50px;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    background-color: #b33a20;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.Etel {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #120603;
+    border: 2px solid #b33a20;
+    font-size: medium;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.Het {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    background-color: #b33a20;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#NotActive {
+    background-color: #120603;
+    border: 2px solid #b33a20;
+}
+#NotActive img {
+    filter: opacity(25%);
+}
+span#ActiveOption {
+    background: #b33a20;
+    border: 2px solid black;
 }

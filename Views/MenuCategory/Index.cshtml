@@ -13,122 +13,93 @@
     }
     else
     {
-        <table>
-            <tr>
-                @for (var i = 0; i < 2; i++)
-                {
-                    if (@Model[i].Name.Contains("Főző"))
-                    {
-                        <td>
-                            <div class="menu_td">Vegyes</div>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
-                        </td>
-                    }
-
-                }
-            </tr>
-            <tr>
-                @for (var i = 2; i < 4; i++)
-                {
-                    if (@Model[i].Name.Contains("Főző"))
-                    {
-                        <td>
-                            <div class="menu_td">Vegyes</div>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <div class="menu_td">@Model[i].Name.Substring(0, @Model[i].Name.LastIndexOf(' '))</div>
-                        </td>
-                    }
-                }
-            </tr>
-            <tr>
-                <td><div id="AButton">A</div></td>
-                <td><div id="BButton">B</div></td>
-            </tr>
-        </table>
-        <div id="BContainer" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Hétfő</th>
-                        <th>Kedd</th>
-                        <th>Szerda</th>
-                        <th>Csütörtök</th>
-                        <th>Péntek</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>BKaja 1</td>
-                        <td>BKaja 2</td>
-                        <td>BKaja 3</td>
-                        <td>BKaja 4</td>
-                        <td>BKaja 5</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="AContainer" style="display: none;">
-            <table>
-                <thead>
-                    <a href="~/DesktopModules/MVC/MenuModul/Views/MenuCategory/Index.cshtml">~/DesktopModules/MVC/MenuModul/Views/MenuCategory/Index.cshtml</a>
-                    <tr>
-                        <th>Hétfő</th>
-                        <th>Kedd</th>
-                        <th>Szerda</th>
-                        <th>Csütörtök</th>
-                        <th>Péntek</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>AKaja 1</td>
-                        <td>AKaja 2</td>
-                        <td>AKaja 3</td>
-                        <td>AKaja 4</td>
-                        <td>AKaja 5</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="MenuModuleContainer">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-6">
+                        @foreach (var products in Model)
+                        {
+                            if (products.MenuProductsID == 1)
+                            {
+                                <div class="MenuModuleCard" id="ActiveCategory" onclick="ChangeCategory(1)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/asia.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
+                            }
+                            else if (products.MenuProductsID == 11)
+                            {
+                                <div class="MenuModuleCard" id="NotActive" onclick="ChangeCategory(2)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/europe.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
+                            }
+                        }
+                    <div class="MenuModuleOptionsRow">
+                        <div class="MenuModuleOption col-xs-6"><span id="ActiveOption" onclick="ChangeOption(1)">A</span></div>
+                        <div class="MenuModuleOption col-xs-6"><span id="NotActive" onclick="ChangeOption(2)">B</span></div>
+                    </div>
+                        
+                    </div>
+                    <div class="col-xs-6">
+                        @foreach (var products in Model)
+                        {
+                            if (products.MenuProductsID == 21)
+                            {
+                                <div class="MenuModuleCard" id="NotActive" onclick="ChangeCategory(3)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/south-america.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
+                            }
+                            else if (products.MenuProductsID == 31)
+                            {
+                                <div class="MenuModuleCard" id="NotActive" onclick="ChangeCategory(4)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/mealkit.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6"></div>
+            </div>
+            <div class="Valami">
+                <div class="row HetiMenu" id="">
+                    <div class="col-xs-2 Het" id="Het"></div>
+                    <div id="Menu"></div>
+                </div>
+            </div>
+        </div> 
     }
-    <script>
+<script>
+    var myModel = @Html.Raw(Json.Encode(Model));
+    console.log(myModel);
+    var actOp = 1;
+    var actCat = "Ázsiai";
+    GetMenu(actOp,actCat);
+        function ChangeOption(o) {
+            var options = document.querySelectorAll(".MenuModuleOption span");
+            if (o === 1) {
+                options[0].id = "ActiveOption";
+                options[1].id = "NotActive";
+            }
+            if (o === 2) {
+                options[0].id = "NotActive";
+                options[1].id = "ActiveOption";
+            }
+            actOp = o;
+            GetMenu(actOp,actCat);
 
-        const AButton = document.getElementById('AButton');
-        const BButton = document.getElementById('BButton');
-
-        const AContainer = document.getElementById('AContainer');
-        const BContainer = document.getElementById('BContainer');
-
-        AButton.addEventListener('click', () => {
-            if (AContainer.style.display === 'none' && BContainer.style.display === 'block') {
-                BContainer.style.display = 'none';
-                AContainer.style.display = 'block';
-            } else if (AContainer.style.display === 'none') {
-                AContainer.style.display = 'block';
+        }
+        function ChangeCategory(c) {
+            var cats = document.querySelectorAll(".MenuModuleCard");
+            for (var i = 0; i < cats.length; i++) {
+                if (i + 1 === c) cats[i].id = "ActiveCategory";
+                else cats[i].id = "NotActive";
             }
-            else {
-                AContainer.style.display = 'none';
+            actCat = document.getElementById("ActiveCategory").innerText;
+            GetMenu(actOp, actCat);
+        }
+    function GetMenu(actOp, actCat) {
+        document.getElementById("Menu").innerHTML = "";
+        if (actOp === 1) {
+            document.getElementById("Het").innerHTML = "A Heti";
+        }
+        else document.getElementById("Het").innerHTML = "B Heti";
+        for (var i = 0; i < myModel.length; i++) {
+            if (myModel[i]["OptionsID"] === actOp && myModel[i]["Category"] === actCat) {
+                document.getElementById("Menu").innerHTML +=
+                    '<div class="col-xs-2"><div class="Nap" id="Nap">'+myModel[i]["Day"]+'</div><div class="Etel" id="Etel">'+myModel[i]["SKU"]+'</div></div>'
             }
-        });
-        BButton.addEventListener('click', () => {
-            if (BContainer.style.display === 'none' && AContainer.style.display === 'block') {
-                AContainer.style.display = 'none';
-                BContainer.style.display = 'block';
-            } else if (BContainer.style.display === 'none') {
-                BContainer.style.display = 'block';
-            }
-            else {
-                BContainer.style.display = 'none';
-            }
-        });
-    </script>
+            //else console.log("Baj van");
+        }
+    }
+</script>
 </div>

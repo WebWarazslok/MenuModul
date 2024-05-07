@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="MenuModul" type="Module" version="1.0.3">
+    <package name="MenuModul" type="Module" version="2.0.0">
       <friendlyName>MenuModul</friendlyName>
       <description>MenuModul</description>
       <iconFile>~/Icons/Sigma/Software_32X32_Standard.png</iconFile>
