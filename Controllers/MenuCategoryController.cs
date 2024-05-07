@@ -5,6 +5,7 @@ using Company.Modules.MenuModul.Models;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using System.Diagnostics;
 using Company.Modules.MenuModul.Components;
+using System.Linq;
 
 namespace Company.Modules.MenuModul.Controllers
 {
@@ -89,7 +90,7 @@ namespace Company.Modules.MenuModul.Controllers
         #region Data from Hcc
         public ActionResult Index()
         {
-            var items=MenuCategoryManager.Instance.GetCategory();
+            var items=MenuCategoryManager.Instance.GetItems();
             return View(items);
         }
         #endregion

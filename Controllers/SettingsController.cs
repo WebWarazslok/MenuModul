@@ -10,10 +10,13 @@
 ' 
 */
 
+using Company.Modules.MenuModul.Components;
 using DotNetNuke.Collections;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using DotNetNuke.Web.Mvc.Framework.Controllers;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Company.Modules.MenuModul.Controllers
@@ -29,11 +32,19 @@ namespace Company.Modules.MenuModul.Controllers
         [HttpGet]
         public ActionResult Settings()
         {
-            var settings = new Models.Settings();
-            settings.Setting1 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("MenuModul_Setting1", false);
-            settings.Setting2 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("MenuModul_Setting2", System.DateTime.Now);
+            var catForDropDown =  MenuCategoryManager.Instance.GetCategory();
 
-            return View(settings);
+            var i = 0;
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            foreach (var item in catForDropDown)
+            {
+                items.Add(new SelectListItem { Text = item.Name, Value = i.ToString() });
+                i++;
+            }
+
+            ViewBag.MovieType = items;
+            return View();
         }
 
         /// <summary>
@@ -46,8 +57,8 @@ namespace Company.Modules.MenuModul.Controllers
         [DotNetNuke.Web.Mvc.Framework.ActionFilters.ValidateAntiForgeryToken]
         public ActionResult Settings(Models.Settings settings)
         {
-            ModuleContext.Configuration.ModuleSettings["MenuModul_Setting1"] = settings.Setting1.ToString();
-            ModuleContext.Configuration.ModuleSettings["MenuModul_Setting2"] = settings.Setting2.ToUniversalTime().ToString("u");
+            ModuleContext.Configuration.ModuleSettings["MenuModul_CategoryId"] = settings.CategoryId.ToString();
+            ModuleContext.Configuration.ModuleSettings["MenuModul_ProductId"] = settings.ProductId.ToString();
 
             return RedirectToDefaultRoute();
         }
