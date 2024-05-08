@@ -21,5 +21,8 @@ namespace Company.Modules.MenuModul.Models
         public string Category { get; set; }
         public string Day { get; set; }
         public int SKU { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
+        public int Price { get; set; }
     }
 }

@@ -4,6 +4,12 @@
 @using DotNetNuke.Web.Mvc.Helpers
 @using DotNetNuke.Web.Client.ClientResourceManagement
 @using DotNetNuke.Framework.JavaScriptLibraries
+@using Hotcakes.Commerce.Catalog;
+@using Hotcakes.Commerce.Extensions;
+@using Hotcakes.Commerce.Orders;
+@using Hotcakes.Commerce.Urls;
+@using Hotcakes.Commerce.Accounts;
+@using Hotcakes.Commerce;
 
 
 <div id="Items-@Dnn.ModuleContext.ModuleId">
@@ -15,7 +21,7 @@
     {
         <div class="MenuModuleContainer">
             <div class="row">
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-6" style="border-right: 3px solid #b33a20">
                     <div class="col-xs-6">
                         @foreach (var products in Model)
                         {
@@ -28,11 +34,11 @@
                                 <div class="MenuModuleCard" id="NotActive" onclick="ChangeCategory(2)">@products.Category <div class="MenuModuleImage"><img src="/Portals/0/Images/hetimenu/europe.png?ver=_oiWoh822KAkfvdb_kZR-A%3d%3d" /></div></div>
                             }
                         }
-                    <div class="MenuModuleOptionsRow">
-                        <div class="MenuModuleOption col-xs-6"><span id="ActiveOption" onclick="ChangeOption(1)">A</span></div>
-                        <div class="MenuModuleOption col-xs-6"><span id="NotActive" onclick="ChangeOption(2)">B</span></div>
-                    </div>
-                        
+                        <div class="MenuModuleOptionsRow">
+                            <div class="MenuModuleOption col-xs-6"><span id="ActiveOption" onclick="ChangeOption(1)">A</span></div>
+                            <div class="MenuModuleOption col-xs-6"><span id="NotActive" onclick="ChangeOption(2)">B</span></div>
+                        </div>
+
                     </div>
                     <div class="col-xs-6">
                         @foreach (var products in Model)
@@ -49,7 +55,33 @@
                         <div class="FunFact"><ion-icon name="information-circle"></ion-icon><div id="FunFact"></div></div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6"></div>
+                <div class="col-xs-12 col-md-6">
+                    <p class="Fop">Hány főre rendelsz?</p>
+                    <div class="myRangeContainer">
+                        <input type="range" min="0" max="10" value="1" id="fo">
+                        <div id="h4-container"><div id="h4-subcontainer"><h4>1<span></span></h4></div></div>
+                    </div>
+                    <div class="MenuModuleReceipt">
+                        <div class="MenuModuleChosenMenu">
+                            <span id="CatSpan"></span>,
+                            <span id="OptSpan"></span>
+                        </div>
+                        <div class="MenuModuleReceiptData">
+                            <div class="col-xs-4">
+                                <p id="ReceiptForNumPeople">1 főre</p>
+                                <p id="FoodForReceipt">5 napi ételbox</p>
+                            </div>
+                            <div class="col-xs-8">
+                                <div id="MenuFavorite"></div>
+                            </div>
+                        </div>
+                        <div class="MenuModuleReceiptPrices col-xs-12">
+                            <div id="Discount">Kedvezmény:</div>
+                            <div id="MenuModuleReceiptEndPrice">Végösszeg:</div>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary" href="#" id="MenuModuleSubmit"> Rendelés leadása</a>
+                </div>
             </div>
             <div class="Valami">
                 <div class="row HetiMenu" id="">
@@ -57,9 +89,9 @@
                     <div id="Menu"></div>
                 </div>
             </div>
-        </div> 
+        </div>
     }
-<script>
+    <script>
     //FunFactList
     var FunList = ["Tudtad? A sajt a világ legnagyobb mennyiségben ellopott étele...",
         "Tudtad? A csicseriborsó és a mandula majdnem annyi fehérjét tartalmaz, mint a steak...",
@@ -72,9 +104,15 @@
 
     //Menu
     var myModel = @Html.Raw(Json.Encode(Model));
+    var order = [];
+    var skus = [];
     console.log(myModel);
     var actOp = 1;
     var actCat = "Ázsiai";
+    var Price = 0;
+    var PricePeople = 0;
+        var Discount = 0;
+        var url = "";
     GetMenu(actOp,actCat);
         function ChangeOption(o) {
             var options = document.querySelectorAll(".MenuModuleOption span");
@@ -99,7 +137,8 @@
             actCat = document.getElementById("ActiveCategory").innerText;
             GetMenu(actOp, actCat);
         }
-    function GetMenu(actOp, actCat) {
+        function GetMenu(actOp, actCat) {
+            skus = [];
         //FunFact
         randomIndex = Math.floor(Math.random() * FunList.length);
         selectedElement = FunList[randomIndex];
@@ -107,17 +146,66 @@
 
         //GetMenu
         document.getElementById("Menu").innerHTML = "";
+        Price = 0;
+        order = [];
         if (actOp === 1) {
             document.getElementById("Het").innerHTML = "A Heti";
+            document.getElementById("OptSpan").innerText = "A Heti";
         }
-        else document.getElementById("Het").innerHTML = "B Heti";
+        else {
+            document.getElementById("Het").innerHTML = "B Heti";
+            document.getElementById("OptSpan").innerHTML = "B Heti";
+        }
         for (var i = 0; i < myModel.length; i++) {
             if (myModel[i]["OptionsID"] === actOp && myModel[i]["Category"] === actCat) {
                 document.getElementById("Menu").innerHTML +=
-                    '<div class="col-xs-2"><div class="Nap" id="Nap">'+myModel[i]["Day"]+'</div><div class="Etel" id="Etel">'+myModel[i]["SKU"]+'</div></div>'
+                    '<div class="col-xs-2"><div class="Nap" id="Nap">' + myModel[i]["Day"] + '</div><div class="Etel" id="Etel">' + myModel[i]["ProductName"] + '</div></div>';
+                Price += myModel[i]["Price"];
+                skus.push(myModel[i]["SKU"])
+                //FOR TESTING ONLY
+                var item = {
+                    SKU: myModel[i]["Price"],
+                    ProductName: myModel[i]["ProductName"]
+                };
+                order.push(item);
             }
             //else console.log("Baj van");
         }
+            document.getElementById("MenuModuleSubmit").href = "/Kosar?ClearCart=true&AddSku=" + skus[0] + "," + skus[1] + "," + skus[2] + "," + skus[3] + "," + skus[4] + "&AddSkuQty=" + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value +"&CouponCode=MENU";
+        //FOR TESTING ONLY
+        console.log(order);
+        document.getElementById("CatSpan").innerText = actCat;
+        if (actCat === "Vegyes") document.getElementById("MenuFavorite").innerHTML = '<div class="MenuModuleFavorite"><ion-icon name="star"></ion-icon> Kedvencünk!<div>';
+        else document.getElementById("MenuFavorite").innerHTML = "";
+        PricePeople = document.getElementById("fo").value * Price;
+        Discount = PricePeople * 0.1;
+        document.getElementById("Discount").innerHTML = '<div class="col-xs-6 MenuModulePriceText">Kedvezmény:</div> <div class="col-xs-6 MenuModuleFT">' + Discount + ' Ft</div>';
+        document.getElementById("MenuModuleReceiptEndPrice").innerHTML = '<div class="col-xs-6 MenuModulePriceText">Végösszeg:</div> <div class="col-xs-6 MenuModuleFT">' + Math.round(PricePeople - Discount) + ' Ft</div>';
+
     }
-</script>
+    //Slider
+    $(function () {
+        var rangePercent = $('[type="range"]').val();
+        $('h4').css({ 'transform': 'translateX(-50%) )', 'left': 10 + '%' });
+        $('[type="range"]').on('change input', function () {
+            rangePercent = $('[type="range"]').val();
+            if (document.getElementById("fo").value == 0) {
+                document.getElementById("fo").value = 1;
+                $('h4').html(1 + '<span></span>');
+                $('h4').css({ 'transform': 'translateX(-50%) )', 'left': 10 + '%' });
+            }
+            else {
+                $('h4').html(rangePercent + '<span></span>');
+                $('h4').css({ 'transform': 'translateX(-50%) )', 'left': rangePercent * 10 + '%' });
+            }
+            PricePeople = document.getElementById("fo").value * Price;
+            Discount = PricePeople * 0.1;
+            document.getElementById("ReceiptForNumPeople").innerText = document.getElementById("fo").value + ' főre';
+            document.getElementById("Discount").innerHTML = '<div class="col-xs-6 MenuModulePriceText">Kedvezmény:</div> <div class="col-xs-6 MenuModuleFT">'+Discount+' Ft</div>';
+            document.getElementById("MenuModuleReceiptEndPrice").innerHTML = '<div class="col-xs-6 MenuModulePriceText">Végösszeg:</div> <div class="col-xs-6 MenuModuleFT">' + Math.round(PricePeople - Discount) + ' Ft</div>';
+            document.getElementById("MenuModuleSubmit").href = "/Kosar?ClearCart=true&AddSku=" + skus[0] + "," + skus[1] + "," + skus[2] + "," + skus[3] + "," + skus[4] + "&AddSkuQty=" + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value + "," + document.getElementById("fo").value + "&CouponCode=MENU";
+        });
+
+    });
+    </script>
 </div>
