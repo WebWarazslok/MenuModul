@@ -32,14 +32,14 @@ namespace Company.Modules.MenuModul.Controllers
         [HttpGet]
         public ActionResult Settings()
         {
-            var catForDropDown =  MenuCategoryManager.Instance.GetCategory();
+            var catForDropDown =  MenuCategoryManager.Instance.GetItems();
 
             var i = 0;
             List<SelectListItem> items = new List<SelectListItem>();
 
             foreach (var item in catForDropDown)
             {
-                items.Add(new SelectListItem { Text = item.Name, Value = i.ToString() });
+                items.Add(new SelectListItem { Text = item.Category, Value = i.ToString() });
                 i++;
             }
 

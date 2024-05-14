@@ -1,3 +1,6 @@
+MenuModuleContainer{
+    font-family: 'Varela Round' ,Arial;
+}
 .MenuModuleCard {
     display: flex;
     overflow: hidden;
@@ -111,4 +114,253 @@
 span#ActiveOption {
     background: #b33a20;
     border: 2px solid black;
+}
+.FunFact{
+    height: 50px;
+    display: flex;
+    align-items:center;
+    margin: 10px;
+}
+.FunFact ion-icon{
+    color:#b33a20;
+    font-size: xx-large;
+    margin-right: 10px;
+}
+.myRangeContainer {
+    height: 100%;
+    margin-left: 50px;
+    margin-bottom: 70px;
+}
+
+.myRangeContainer h1,
+.myRangeContainer h2,
+.myRangeContainer h3,
+.myRangeContainer h4,
+.myRangeContainer h5,
+.myRangeContainer h6 {
+	margin: 0;
+}
+
+.myRangeContainer input[type="range"] {
+	outline: 0;
+	border: 0;
+	border-radius: 500px;
+	width: 400px;
+	max-width: 100%;
+	margin: 24px 0 16px;
+	transition: box-shadow 0.2s ease-in-out;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+	.myRangeContainer input[type="range"] {
+		overflow: hidden;
+		height: 40px;
+		-webkit-appearance: none;
+		background-color: #646464;
+	}
+    .myRangeContainer input[type="range"]:hover {
+        cursor:grab;
+    }
+	.myRangeContainer input[type="range"]::-webkit-slider-runnable-track {
+		height: 40px;
+		-webkit-appearance: none;
+		color: #b33a20;
+		transition: box-shadow 0.2s ease-in-out;
+	}
+
+	.myRangeContainer input[type="range"]::-webkit-slider-thumb {
+		width: 40px;
+		-webkit-appearance: none;
+		height: 40px;
+		cursor: ew-resize;
+		background: #b33a20;
+		box-shadow: -340px 0 0 320px #b33a20, inset 0 0 0 40px black;
+		border-radius: 50%;
+		transition: box-shadow 0.2s ease-in-out;
+		position: relative;
+	}
+    .myRangeContainer input[type="range"]::-webkit-slider-thumb {
+		cursor:grab;
+	}
+	.myRangeContainer input[type="range"]:active::-webkit-slider-thumb {
+		background: #120603;
+		box-shadow: -340px 0 0 320px black, inset 0 0 0 3px #b33a20;
+	}
+}
+
+.myRangeContainer input[type="range"]::-moz-range-progress {
+	background-color: #b33a20;
+}
+
+.myRangeContainer input[type="range"]::-moz-range-track {
+	background-color: #646464;
+}
+
+.myRangeContainer input[type="range"]::-ms-fill-lower {
+	background-color: #b33a20;
+}
+
+.myRangeContainer input[type="range"]::-ms-fill-upper {
+	background-color: #646464;
+}
+
+#h4-container {
+	width: 400px;
+	max-width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+#h4-container #h4-subcontainer {
+	width: 100%;
+	position: relative;
+}
+
+#h4-container h4 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	color: #fff !important;
+	font-size: 12px;
+	transform-origin: center -10px;
+	transform: translateX(-50%);
+    margin-top: -2px;
+}
+
+#h4-container h4 span {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #b33a20;
+	border-radius: 0 50% 50% 50%;
+	transform: rotate(45deg);
+	z-index: -1;
+}
+
+input:not(:active) + #h4-container h4 {
+	opacity: 1;
+	pointer-events: none;
+}
+.Fop {
+    font-size: xx-large;
+    font-family: 'Madimi One', Arial;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.MenuModuleReceipt {
+    height: 350px;
+    padding: 30px;
+    background-color: #120603;
+    border: 2px solid #b33a20;
+    border-radius: 25px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.MenuModuleChosenMenu{
+    font-size:xx-large;
+    font-family:'Madimi One', Arial;
+    border-bottom: 2px solid #b33a20;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+#ReceiptForNumPeople{
+    margin-bottom: 0;
+}
+#ReceiptForNumPeople, #FoodForReceipt {
+    font-size: medium;
+}
+#MenuFavorite{
+    font-size:x-large;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#MenuFavorite ion-icon{
+    margin-right: 10px;
+    color: #b33a20;
+    background-color: grey;
+    padding:5px;
+}
+.MenuModuleFavorite{
+    display:flex;
+    align-items:center;
+    padding-right:10px;
+    overflow:hidden;
+    border-radius: 10px;
+    background-color: #383838;
+    border: 2px solid #b33a20;
+}
+.MenuModuleSubmit{
+    cursor: pointer;
+    background-color:grey;
+    border: 1px solid black;
+}
+#MenuModuleSubmit{
+    display: flex;
+    float: right;
+    margin-right: 10px;
+    height: 50px;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.MenuModuleReceipt{
+    height: 358px !important;
+    background: linear-gradient(180deg, #120603 275px, #301212 275px);
+}
+.MenuModuleReceiptPrices{
+    height: 200px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: normal;
+    padding-inline: 0px;
+    font-weight: bold;
+}
+.MenuModulePriceText{
+    padding: 0px;
+    margin: 0px;
+    font-size: larger;
+    line-height: normal;
+    text-align: end;
+}
+.MenuModuleFT{
+    padding: 0px;
+    margin: 0px;
+    font-size: larger;
+    line-height: normal;
+    text-align: end;
+}
+.MenuModuleReceiptPrices #Discount, .MenuModuleReceiptPrices #MenuModuleReceiptEndPrice{
+padding-top: 5px;
+padding-bottom: 5px;
+}
+.MenuModuleReceiptPrices #Discount{
+    border-top: 2px dashed #b33a20;
+}
+.MenuModuleReceiptPrices #Discount .MenuModuleFT{
+    color: #b33a20 !important;
+}
+.MenuModuleReceiptPrices #Discount .MenuModuleFT::before{
+    content: '-';
+}
+.Fop{
+    font-family: 'Madimi One', Arial !important;
+    margin-left: 8px;
+}
+#h4-container h4 span {
+    outline: 2px solid black;
+}
+#h4-container h4 {
+    font-size: large !important;
 }

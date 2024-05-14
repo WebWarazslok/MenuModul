@@ -6,6 +6,15 @@ using DotNetNuke.Web.Mvc.Framework.ActionFilters;
 using System.Diagnostics;
 using Company.Modules.MenuModul.Components;
 using System.Linq;
+using System.Net.NetworkInformation;
+using Hotcakes.Commerce.Catalog;
+using Hotcakes.Commerce.Extensions;
+using Hotcakes.Commerce.Orders;
+using Hotcakes.Commerce.Urls;
+using Hotcakes.Commerce.Accounts;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Data.EF;
+
 
 namespace Company.Modules.MenuModul.Controllers
 {
@@ -88,6 +97,7 @@ namespace Company.Modules.MenuModul.Controllers
         #endregion
 
         #region Data from Hcc
+        [HttpGet]
         public ActionResult Index()
         {
             var items=MenuCategoryManager.Instance.GetItems();
