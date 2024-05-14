@@ -302,3 +302,65 @@ input:not(:active) + #h4-container h4 {
     background-color:grey;
     border: 1px solid black;
 }
+#MenuModuleSubmit{
+    display: flex;
+    float: right;
+    margin-right: 10px;
+    height: 50px;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.MenuModuleReceipt{
+    height: 358px !important;
+    background: linear-gradient(180deg, #120603 275px, #301212 275px);
+}
+.MenuModuleReceiptPrices{
+    height: 200px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: normal;
+    padding-inline: 0px;
+    font-weight: bold;
+}
+.MenuModulePriceText{
+    padding: 0px;
+    margin: 0px;
+    font-size: larger;
+    line-height: normal;
+    text-align: end;
+}
+.MenuModuleFT{
+    padding: 0px;
+    margin: 0px;
+    font-size: larger;
+    line-height: normal;
+    text-align: end;
+}
+.MenuModuleReceiptPrices #Discount, .MenuModuleReceiptPrices #MenuModuleReceiptEndPrice{
+padding-top: 5px;
+padding-bottom: 5px;
+}
+.MenuModuleReceiptPrices #Discount{
+    border-top: 2px dashed #b33a20;
+}
+.MenuModuleReceiptPrices #Discount .MenuModuleFT{
+    color: #b33a20 !important;
+}
+.MenuModuleReceiptPrices #Discount .MenuModuleFT::before{
+    content: '-';
+}
+.Fop{
+    font-family: 'Madimi One', Arial !important;
+    margin-left: 8px;
+}
+#h4-container h4 span {
+    outline: 2px solid black;
+}
+#h4-container h4 {
+    font-size: large !important;
+}
