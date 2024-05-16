@@ -91,7 +91,7 @@
             </div>
         </div>
     }
-    <script>
+<script>
     //FunFactList
     var FunList = ["Tudtad? A sajt a világ legnagyobb mennyiségben ellopott étele...",
         "Tudtad? A csicseriborsó és a mandula majdnem annyi fehérjét tartalmaz, mint a steak...",
@@ -207,5 +207,11 @@
         });
 
     });
-    </script>
+        var sf = $.ServicesFramework('@Dnn.ActiveModule.ModuleID');
+        var serviceUrl = sf.getServiceRoot('MenuCategory');
+        var url = serviceUrl + "Menus/Get";
+        console.log("!!! WRN !!!" + @Dnn.ActiveModule.ModuleID);
+    console.log("!!! WRN !!!" + serviceUrl);
+    console.log("!!! WRN !!!" + url);
+</script>
 </div>

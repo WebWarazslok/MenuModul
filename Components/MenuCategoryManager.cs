@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Company.Modules.MenuModul.Components
 {
-    internal interface ICategoryManager
+    public interface ICategoryManager
     {
         IEnumerable<MenuCategory> GetItems();
     }
-    internal class MenuCategoryManager : ServiceLocator<ICategoryManager, MenuCategoryManager>, ICategoryManager
+    public class MenuCategoryManager : ServiceLocator<ICategoryManager, MenuCategoryManager>, ICategoryManager
     {
         public IEnumerable<MenuCategory> GetItems()
         {
