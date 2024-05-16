@@ -12,17 +12,13 @@ namespace Company.Modules.MenuModul.Controllers.Api
 {
     public class MenusController : DnnApiController
     {
-        public MenusController()
-        {
-            
-        }
-
         [HttpGet()]
         public HttpResponseMessage Get()
         {
             try
             {
-                string dnnHello = "Hello from Dnn!";
+                //API TEST
+                //string dnnHello = "Hello from Dnn!";
                 var items = MenuCategoryManager.Instance.GetItems();
                 return Request.CreateResponse(HttpStatusCode.OK, items);
             }
